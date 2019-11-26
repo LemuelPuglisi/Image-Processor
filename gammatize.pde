@@ -1,4 +1,3 @@
-
 /*
  * Global variables
  *
@@ -25,7 +24,7 @@ void settings()
 void setup()
 {
     background(0);
-    T = new Transformer(I); 
+    T = new Transformer(I_resized); 
     printImage(); 
 }
 
@@ -34,7 +33,8 @@ void printImage()
     T.s_range = 245; 
     T.e_range = 255; 
     T.setImage(I); 
-    T.extraLightRemap(); 
+    // T.extraLightRemap(); 
+    T.lookForBinladen(); 
     T.print(0, 0); 
 }
 
@@ -45,9 +45,22 @@ void draw() {}
 void keyPressed()
 {
     if (key == ' ') {
-        if (current_frame < 33)
-            current_frame ++; 
-        I = loadImage("analyzable/output_00" + current_frame + ".png");
+        println("current frame: " + current_frame); 
+        if (current_frame < 33) {
+            current_frame ++;
+            I = loadImage("analyzable/output_00" + current_frame + ".png");
+            I_resized = I.get(0, 0, 1000, 500);
+        }    
+        printImage();
+    }
+
+    if (key == '-') {
+        println("current frame: " + current_frame); 
+        if (current_frame > 20) {
+            current_frame --;
+            I = loadImage("analyzable/output_00" + current_frame + ".png");
+            I_resized = I.get(0, 0, 1000, 500);
+        }    
         printImage();
     }
 }

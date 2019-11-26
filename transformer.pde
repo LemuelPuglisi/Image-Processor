@@ -25,6 +25,11 @@ class Transformer
         buffer = original.copy(); 
     }
 
+    public void turnGray()
+    {
+        buffer.filter(GRAY); 
+    }
+
     public void print(int x, int y)
     {
         image(buffer, x, y); 
@@ -69,6 +74,30 @@ class Transformer
                 color k = color(redValue, greenValue, blueValue); 
 
                 buffer.set(i, j, k); 
+            }
+        }
+    }
+
+    public void lookForBinladen()
+    {
+        reset(); 
+        turnGray(); 
+
+        for (int i = 0; i < buffer.width; i++) {
+            for (int j = 0; j < buffer.height; j++) {
+
+                color c = buffer.get(i, j); 
+                float L = red(c);
+
+                if (int(L) == 248) {
+                    color k = color(0); 
+                    buffer.set(i, j, k); 
+                }
+                else {
+                    color w = color(255); 
+                    buffer.set(i, j, w); 
+                }
+
             }
         }
     }
