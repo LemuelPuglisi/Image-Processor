@@ -102,5 +102,33 @@ class Transformer
         }
     }
 
+    public void gamma(int gamma)
+    {
+        reset(); 
+        turnGray(); 
+
+        for (int i = 0; i < buffer.width; i++) {
+            for (int j = 0; j < buffer.height; j++) {
+
+                color k = buffer.get(i, j); 
+                
+                // Luminance
+                float L = red(k);
+
+                // Normalization 
+                float c = 255 / pow(255, gamma); 
+
+                // gamma function output
+                float s = c * pow(L, gamma);
+
+                // convert into RGB (gray scale) color
+                color nc = color(s, s, s);
+                
+                buffer.set(i, j, nc);  
+            }
+        }
+
+    }
+
 }
 
