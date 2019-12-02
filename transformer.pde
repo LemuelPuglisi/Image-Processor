@@ -130,5 +130,45 @@ class Transformer
 
     }
 
+    public void logarithm_RGB()
+    {
+        reset();
+        turnGray();
+
+        for (int i = 0; i < buffer.width; i++) {
+            for (int j = 0; j < buffer.height; j++) {
+
+                color k = buffer.get(i, j); 
+
+                float c = 255 / log(256); 
+                float r = c * log(1 + red(k)); 
+                float g = c * log(1 + green(k));
+                float b = c * log(1 + blue(k)); 
+
+                buffer.set(i, j, color(r,g,b)); 
+            }
+        }
+    }
+
+    public void gamma_RGB(float gamma)
+    {
+        reset();
+        turnGray();
+
+        for (int i = 0; i < buffer.width; i++) {
+            for (int j = 0; j < buffer.height; j++) {
+
+                color k = buffer.get(i, j); 
+
+                float c = 255 / pow(255, gamma); 
+                float r = c * pow(red(k),gamma);  
+                float g = c * pow(green(k),gamma); 
+                float b = c * pow(blue(k),gamma);  
+
+                buffer.set(i, j, color(r,g,b)); 
+            }
+        }   
+    }
+
 }
 

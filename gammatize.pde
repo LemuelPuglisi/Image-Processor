@@ -14,7 +14,7 @@ void settings()
 
     I = loadImage("analyzable/output_00" + current_frame + ".png");
 
-    I_resized = I.get(0, 0, 1000, 500); 
+    I_resized = I.get(250, 250, 1000, 500); 
 
     T = new Transformer(I_resized);
 
@@ -47,31 +47,13 @@ void draw()
 void keyPressed()
 {
 
-    if (key == '1')
-    { 
-        T.gamma(15);
-        edits = true; 
-    }  
-    else if (key == '2') 
-    {
-        T.extraLightRemap();
-        edits = true;  
-    }
-    else if (key == '3')
-    {
-        T.lookForBinladen(); 
-        edits = true; 
-    }
-    else if (key == '4') 
-    {
-        T.negative(); 
-        edits = true;
-    }
-    else if (key == 'r')
-    {
-        T.reset(); 
-        edits = true; 
-    }
+    if      (key == '1') { T.gamma(15);         edits = true; }  
+    else if (key == '2') { T.extraLightRemap(); edits = true; }
+    else if (key == '3') { T.lookForBinladen(); edits = true; }
+    else if (key == '4') { T.negative();        edits = true; }
+    else if (key == '5') { T.logarithm_RGB();   edits = true; }
+    else if (key == '6') { T.gamma_RGB(2);      edits = true; }
+    else if (key == 'r') { T.reset();           edits = true; }
 
 
     if (key == ' ') 
